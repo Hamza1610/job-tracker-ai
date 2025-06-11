@@ -240,4 +240,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ using Next.js 14, TypeScript, and modern web technologies.**
+**Developed by Muhammad Hamza using Next.js 14, TypeScript, and modern web technologies.**
