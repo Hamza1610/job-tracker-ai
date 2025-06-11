@@ -111,12 +111,12 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-card">
+      <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Briefcase className="h-6 w-6" />
-              <h1 className="text-2xl font-bold">Job Tracker</h1>
+              <h1 className="text-xl sm:text-2xl font-bold">Job Tracker</h1>
             </div>
             <ThemeToggle />
           </div>
@@ -124,9 +124,9 @@ export default function HomePage() {
       </header>
 
       {/* Navigation */}
-      <nav className="border-b bg-card">
+      <nav className="sticky top-[57px] z-40 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
         <div className="container mx-auto px-4">
-          <div className="flex space-x-8">
+          <div className="flex flex-wrap sm:flex-nowrap gap-4 sm:gap-8">
             {[
               { id: "dashboard", label: "Dashboard", icon: TrendingUp },
               { id: "add", label: "Add Job", icon: Plus },
@@ -135,7 +135,7 @@ export default function HomePage() {
               <button
                 key={id}
                 onClick={() => setActiveTab(id as any)}
-                className={`flex items-center gap-2 py-4 px-2 border-b-2 transition-colors ${
+                className={`flex items-center gap-2 py-3 sm:py-4 px-2 border-b-2 transition-colors whitespace-nowrap ${
                   activeTab === id
                     ? "border-primary text-primary"
                     : "border-transparent text-muted-foreground hover:text-foreground"
@@ -150,7 +150,7 @@ export default function HomePage() {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-6 sm:py-8">
         <AnimatePresence mode="wait">
           {activeTab === "dashboard" && (
             <motion.div
@@ -162,7 +162,7 @@ export default function HomePage() {
               className="space-y-6"
             >
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <Card>
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm font-medium">Total Applications</CardTitle>
@@ -213,7 +213,7 @@ export default function HomePage() {
                   </CardContent>
                 </Card>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                   <AnimatePresence>
                     {jobs.map((job) => (
                       <JobCard
