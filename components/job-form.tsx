@@ -9,8 +9,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { createJobSchema, type CreateJobInput } from "@/lib/validations/job"
 import type { JobStatus } from "@/types/job"
 
+const statusOptions = ["Applied", "Interviewing", "Rejected", "Offer"] as const
+
 interface JobFormProps {
-  onSubmit: (data: CreateJobInput) => Promise<void>
+  onSubmit: (data: CreateJobInput) => void
   isLoading?: boolean
 }
 
@@ -18,27 +20,23 @@ export function JobForm({ onSubmit, isLoading }: JobFormProps) {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<CreateJobInput>({
     resolver: zodResolver(createJobSchema),
   })
 
-  const handleFormSubmit = async (data: CreateJobInput) => {
-    await onSubmit(data)
-    reset()
-  }
-
-  const statusOptions: JobStatus[] = ["Applied", "Interviewing", "Rejected", "Offer"]
-
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <Card>
         <CardHeader>
           <CardTitle>Add New Job Application</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <label htmlFor="title" className="block text-sm font-medium mb-1">
                 Job Title
@@ -54,12 +52,12 @@ export function JobForm({ onSubmit, isLoading }: JobFormProps) {
 
             <div>
               <label htmlFor="company" className="block text-sm font-medium mb-1">
-                Company Name
+                Company
               </label>
               <Input
                 id="company"
                 {...register("company")}
-                placeholder="e.g. TechCorp Inc."
+                placeholder="e.g. Acme Inc."
                 className={errors.company ? "border-red-500" : ""}
               />
               {errors.company && <p className="text-red-500 text-sm mt-1">{errors.company.message}</p>}
