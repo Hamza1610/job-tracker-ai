@@ -33,18 +33,18 @@ export function JobCard({ job, onEdit, onDelete }: JobCardProps) {
     >
       <Card className="h-full hover:shadow-lg transition-shadow duration-200">
         <CardHeader className="pb-3">
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">
-              <CardTitle className="text-lg truncate">{job.title}</CardTitle>
-              <p className="text-muted-foreground font-medium">{job.company}</p>
+              <CardTitle className="text-base sm:text-lg truncate">{job.title}</CardTitle>
+              <p className="text-sm sm:text-base text-muted-foreground font-medium truncate">{job.company}</p>
             </div>
-            <Badge variant={statusColors[job.status]}>{job.status}</Badge>
+            <Badge variant={statusColors[job.status]} className="shrink-0">{job.status}</Badge>
           </div>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent>
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <ExternalLink className="h-4 w-4 text-muted-foreground" />
+              <ExternalLink className="h-4 w-4 text-muted-foreground shrink-0" />
               <a
                 href={job.applicationLink}
                 target="_blank"
@@ -60,7 +60,7 @@ export function JobCard({ job, onEdit, onDelete }: JobCardProps) {
             <div className="flex gap-2 pt-2">
               <Button variant="outline" size="sm" onClick={() => onEdit(job)} className="flex-1">
                 <Edit className="h-4 w-4 mr-1" />
-                Edit
+                <span className="hidden sm:inline">Edit</span>
               </Button>
               <Button
                 variant="outline"
@@ -69,7 +69,7 @@ export function JobCard({ job, onEdit, onDelete }: JobCardProps) {
                 className="flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"
               >
                 <Trash2 className="h-4 w-4 mr-1" />
-                Delete
+                <span className="hidden sm:inline">Delete</span>
               </Button>
             </div>
           </div>
